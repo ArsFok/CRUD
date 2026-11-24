@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException, Response
 from pydantic import BaseModel
 
+from db import get_connection
+
 app = FastAPI()
 
 
@@ -20,7 +22,7 @@ class MoviePatch(BaseModel):
     watched: bool | None = None
 
 
-# Временное хранилище
+# Временное хранилище для ещё не перенесённых операций
 movies = [
     {
         "id": 1,
@@ -39,10 +41,23 @@ movies = [
 ]
 
 
-# GET — получение всех фильмов
+# GET — получение всех фильмов из PostgreSQL
 @app.get("/api/movies")
 def get_movies():
-    return movies
+
+    with get_connection() as connection:
+
+        with connection.cursor() as cursor:
+
+            cursor.execute("""
+                SELECT id, title, year, rating, watched
+                FROM movies
+                ORDER BY id;
+            """)
+
+            movies_from_db = cursor.fetchall()
+
+    return movies_from_db
 
 
 # GET — получение фильма по ID
