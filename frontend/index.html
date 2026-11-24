@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CinemaBase</title>
+
+    <link rel="stylesheet" href="/style.css">
+    <script src="/app.js" defer></script>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <a class="logo" href="/">CinemaBase</a>
+            <span class="header-label">Твоя коллекция фильмов</span>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <p class="eyebrow">PERSONAL MOVIE LIBRARY</p>
+            <h1>Твоя коллекция кино</h1>
+            <p>Храни фильмы, отслеживай просмотренное и открывай новые истории.</p>
+        </section>
+
+        <div class="layout">
+
+            <section class="panel form-panel">
+
+                <h2>Добавить фильм</h2>
+
+                <form id="movie-form">
+
+                    <label for="title">Название фильма</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="Например, Интерстеллар"
+                        maxlength="255"
+                        required
+                    >
+
+                    <label for="year">Год выпуска</label>
+                    <input
+                        type="number"
+                        id="year"
+                        name="year"
+                        min="1888"
+                        max="2100"
+                        required
+                    >
+
+                    <label for="rating">Оценка</label>
+                    <input
+                        type="number"
+                        id="rating"
+                        name="rating"
+                        min="0"
+                        max="10"
+                        step="0.1"
+                        required
+                    >
+
+                    <label class="checkbox-label">
+                        <input
+                            type="checkbox"
+                            id="watched"
+                            name="watched"
+                        >
+                        Уже просмотрен
+                    </label>
+
+                    <button type="submit">
+                        Добавить фильм
+                    </button>
+
+                    <p id="status" role="status"></p>
+
+                </form>
+
+            </section>
+
+            <section class="movies-section">
+
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">YOUR LIBRARY</p>
+                        <h2>Мои фильмы</h2>
+                    </div>
+
+                    <button id="refresh-button" class="secondary-button">
+                        Обновить
+                    </button>
+                </div>
+
+                <div id="movies-list" class="movie-grid">
+                    <p>Загрузка фильмов...</p>
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        CinemaBase · Учебный проект
+    </footer>
+
+</body>
+</html>

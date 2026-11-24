@@ -1,4 +1,4 @@
-
+from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, HTTPException, Response
 from pydantic import BaseModel
 from psycopg import sql
@@ -191,3 +191,9 @@ def delete_movie(movie_id: int):
         )
 
     return Response(status_code=204)
+
+app.mount(
+    "/",
+    StaticFiles(directory="frontend", html=True),
+    name="frontend"
+)
